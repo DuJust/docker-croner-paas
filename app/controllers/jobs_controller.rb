@@ -1,6 +1,6 @@
 class JobsController < ActionController::API
   rescue_from RecordInvalid, with: :handle_resource_already_exist_exception
-  rescue_from RecordNotFound, with: :handle_exception
+  rescue_from RecordNotFound, with: :handle_resource_not_found_exception
 
   def index
     render json: JobService.instance.all.to_json
@@ -18,11 +18,11 @@ class JobsController < ActionController::API
 
   private
 
-  def handle_exception(error)
-    render json: { successful: false, error_message: error.message }, status: 404
+  def handle_resource_not_found_exception(error)
+    render json: { successful: false, error_message: error.message }, status: :not_found
   end
 
   def handle_resource_already_exist_exception(error)
-    render json: { successful: false, error_message: error.message }, status: 409
+    render json: { successful: false, error_message: error.message }, status: :conflict
   end
 end
