@@ -1,0 +1,2 @@
+class DockerCronerPaasException < StandardError
+end
