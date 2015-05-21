@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 gem 'rails', '4.2.1'
@@ -9,6 +9,8 @@ gem 'spring', :group => :development
 
 
 gem 'sqlite3'
+
+gem 'rufus-scheduler'
 
 
 
