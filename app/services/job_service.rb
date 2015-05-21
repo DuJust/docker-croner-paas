@@ -13,7 +13,7 @@ class JobService
   end
 
   def destroy(image_uri)
-    raise RecordInvalid.new("Not exist image: #{image_uri}") unless jobs[image_uri]
+    raise RecordNotFound.new("Not exist image: #{image_uri}") unless jobs[image_uri]
     jobs[image_uri].stop
     jobs[image_uri] = nil
     jobs.compact
