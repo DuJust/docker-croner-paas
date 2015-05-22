@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :jobs, only: [:index, :create]
+  put 'jobs' => 'jobs#update'
   delete 'jobs' => 'jobs#destroy'
   root 'jobs#index'
   # The priority is based upon order of creation: first created -> highest priority.

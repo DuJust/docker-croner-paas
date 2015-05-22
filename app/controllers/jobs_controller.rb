@@ -1,6 +1,7 @@
 class JobsController < ActionController::API
   rescue_from RecordInvalid, with: :handle_resource_already_exist_exception
   rescue_from RecordNotFound, with: :handle_resource_not_found_exception
+  rescue_from MethodNotAllowed, with: :handle_method_not_allowed_exception
 
   def index
     render json: JobService.instance.all.to_json
@@ -8,6 +9,11 @@ class JobsController < ActionController::API
 
   def create
     JobService.instance.create(params[:image_uri], params[:cronline])
+    render json: { successful: true }
+  end
+
+  def update
+    JobService.instance.update(params[:image_uri], params[:status])
     render json: { successful: true }
   end
 
@@ -24,5 +30,9 @@ class JobsController < ActionController::API
 
   def handle_resource_already_exist_exception(error)
     render json: { successful: false, error_message: error.message }, status: :conflict
+  end
+
+  def handle_method_not_allowed_exception(error)
+    render json: { successful: false, error_message: error.message }, status: :method_not_allowed
   end
 end

@@ -14,14 +14,22 @@ class Job
     @scheduler.shutdown
   end
 
+  def pause
+    @scheduler.pause
+  end
+
+  def resume
+    @scheduler.resume
+  end
+
   def as_json(*)
     {
       image_uri:  @image_uri,
       cronline:   @cronline,
       desc:       @desc,
       created_at: @scheduler.started_at,
-      active:     @scheduler.up?,
-      next_time:  @scheduler.jobs.first.try(:next_time)
+      paused:     @scheduler.paused?,
+      next_time:  @scheduler.paused? ? 'nil' : @scheduler.jobs.first.try(:next_time)
     }
   end
 end

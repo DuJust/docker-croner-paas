@@ -12,6 +12,18 @@ class JobService
     jobs[image_uri] = job
   end
 
+  def update(image_uri, status)
+    raise RecordNotFound.new("Not exist image: #{image_uri}") unless jobs[image_uri]
+    case status
+      when 'pause'
+        jobs[image_uri].pause
+      when 'resume'
+        jobs[image_uri].resume
+      else
+        raise MethodNotAllowed.new("Not allowed status: #{status}")
+    end
+  end
+
   def destroy(image_uri)
     raise RecordNotFound.new("Not exist image: #{image_uri}") unless jobs[image_uri]
     jobs[image_uri].stop
