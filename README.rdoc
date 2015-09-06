@@ -4,8 +4,6 @@
 1. make sure your docker running well.
 2. run command as following: 
 
-```
   make name=worker build-sample
   make build
   make run
-```
