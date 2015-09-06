@@ -13,6 +13,7 @@ RUN curl -o /usr/local/bin/docker https://get.docker.com/builds/Linux/x86_64/doc
 WORKDIR /web-app
 
 ADD Gemfile /web-app/Gemfile
+ADD Gemfile.lock /web-app/Gemfile.lock
 RUN gem update bundler
 RUN bundle install --jobs 8
 
