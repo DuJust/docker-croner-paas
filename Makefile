@@ -2,6 +2,9 @@ repository = docker-croner-paas
 
 default: build
 
+build-sample:
+				 docker build -t $(name) ./sample-jobs/
+
 build:
 				 docker build -t $(repository) .
 
